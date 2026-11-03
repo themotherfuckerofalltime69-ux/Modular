@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05080c" />
+  <title>Modular Room Generator</title>
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">RG</span><div><strong>ROOM GENERATOR</strong><small>MODULAR SPATIAL WORKBENCH · v1.0</small></div></div>
+      <div class="top-actions">
+        <span id="status" class="status">SYSTEM READY</span>
+        <button id="export-btn" class="primary">Export World JSON</button>
+      </div>
+    </header>
+    <main class="layout">
+      <aside class="sidebar">
+        <section class="panel-section">
+          <div class="section-heading"><span>WORLD HIERARCHY</span><span class="muted" id="room-count">01 ROOM</span></div>
+          <div id="room-list" class="room-list"></div>
+          <button id="add-room" class="wide-button">＋ ADD ROOM</button>
+        </section>
+        <section class="panel-section">
+          <div class="section-heading">ROOM GENERATION</div>
+          <label>Room name<input id="room-name" value="Room 01" maxlength="40"></label>
+          <div class="two-fields">
+            <label>Width <input id="room-width" type="number" min="8" max="100" value="24"></label>
+            <label>Depth <input id="room-depth" type="number" min="8" max="100" value="24"></label>
+          </div>
+          <label>Wall height<input id="room-height" type="number" min="3" max="30" value="8"></label>
+          <label>Room style
+            <select id="room-style">
+              <option value="industrial">Industrial</option>
+              <option value="research">Research facility</option>
+              <option value="concrete">Concrete</option>
+              <option value="hangar">Hangar</option>
+            </select>
+          </label>
+          <label>Generation seed<input id="room-seed" type="number" value="84219"></label>
+          <button id="generate-room" class="wide-button primary">GENERATE / UPDATE ROOM</button>
+          <button id="duplicate-room" class="wide-button">DUPLICATE SELECTED</button>
+        </section>
+        <section class="panel-section">
+          <div class="section-heading">CONNECTIONS</div>
+          <label>Connect selected room to
+            <select id="target-room"></select>
+          </label>
+          <label>Exit direction
+            <select id="exit-direction">
+              <option value="east">East</option><option value="west">West</option>
+              <option value="north">North</option><option value="south">South</option>
+            </select>
+          </label>
+          <button id="connect-room" class="wide-button">＋ CONNECT ROOMS</button>
+          <p class="hint">Connections create matching doorway openings. Rooms are arranged automatically in the world preview.</p>
+        </section>
+        <section class="panel-section">
+          <div class="section-heading">VALIDATION</div>
+          <button id="validate-world" class="wide-button">RUN WORLD VALIDATION</button>
+          <div id="validation-output" class="validation-output">No validation run yet.</div>
+        </section>
+      </aside>
+      <section class="viewport-wrap">
+        <div class="viewport-toolbar">
+          <div><strong>3D WORLD VIEWPORT</strong><span class="muted"> · Drag to orbit · Scroll to zoom</span></div>
+          <div class="view-actions"><button id="reset-view">RESET VIEW</button><button id="toggle-grid">GRID: ON</button></div>
+        </div>
+        <div id="viewport"></div>
+        <div class="viewport-footer"><span id="selection-label">SELECTED: ROOM 01</span><span>THREE.JS · REAL-TIME PREVIEW</span></div>
+      </section>
+      <aside class="inspector">
+        <section class="panel-section">
+          <div class="section-heading">ROOM INSPECTOR</div>
+          <div id="inspector-content" class="inspector-content">
+            <div class="empty-state">Select a room to inspect its properties.</div>
+          </div>
+        </section>
+        <section class="panel-section">
+          <div class="section-heading">WORLD DATA</div>
+          <pre id="world-summary" class="data-preview"></pre>
+        </section>
+        <section class="panel-section">
+          <div class="section-heading">CONTROLS</div>
+          <p class="hint">Select rooms from the hierarchy. Use the generation panel to update dimensions and style. Connect rooms to create doorways. Export saves the complete world graph as JSON.</p>
+        </section>
+      </aside>
+    </main>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
